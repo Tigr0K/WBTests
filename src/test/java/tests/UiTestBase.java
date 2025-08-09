@@ -1,4 +1,4 @@
-package web.tests;
+package tests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
@@ -13,7 +13,7 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 public class UiTestBase {
     public static final WebConfig webConfig = WebProvider.getWebConfig();
-    public static final ApiConfig apiConfig = ApiProvider.getApiConfig();
+
 
     @BeforeAll
     public static void setupBaseTestConfiguration() {

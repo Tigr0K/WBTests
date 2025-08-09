@@ -8,13 +8,6 @@ import java.util.Map;
 import java.util.UUID;
 
 public class BaseConfig {
-    public static String baseURI = ApiProvider.getApiConfig().baseURI();;
-    public static String apiBaseURI = ApiProvider.getApiConfig().apiBaseURI();
-    public static String authEP =  ApiProvider.getApiConfig().authEP();
-    public static String currentUserEP = ApiProvider.getApiConfig().currentUserEP();
-    public static String customerCartIdEP = ApiProvider.getApiConfig().customerCartIdEP();
-    public static String cartEP = ApiProvider.getApiConfig().cartEP();
-    public static String authByEmailEP = ApiProvider.getApiConfig().authByEmailEP();
 
     private final WebConfig webConfig;
 
@@ -23,7 +16,7 @@ public class BaseConfig {
     }
 
     public void setConfig() {
-        RestAssured.baseURI = apiBaseURI;
+
         Configuration.pageLoadStrategy = "eager";
         Configuration.baseUrl = webConfig.getBaseUrl();
         Configuration.browser = webConfig.getBrowser().toString();
