@@ -58,26 +58,18 @@ tasks.withType(Test) {
     }
 }
 
-task authorization_test(type: Test) {
+task smokeTests(type: Test) {
     useJUnitPlatform {
-        includeTags("authorization")
+        includeTags("SMOKE")
     }
 }
-
-task authorization_api_test(type: Test) {
+task searchTests(type: Test) {
     useJUnitPlatform {
-        includeTags("authorization-api")
+        includeTags("SearchTests")
     }
 }
-
-task authorization_web_test(type: Test) {
+task basketTests(type: Test) {
     useJUnitPlatform {
-        includeTags("authorization-web")
-    }
-}
-
-task items_api_test(type: Test) {
-    useJUnitPlatform {
-        includeTags("items-api")
+        includeTags("BasketTests")
     }
 }
