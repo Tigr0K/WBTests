@@ -17,7 +17,6 @@ import static io.qameta.allure.Allure.step;
 
 
 @DisplayName("Тесты корзины")
-@Tag("BasketTests")
 public class BasketUiTests extends UiTestBase {
     MainPage mainPage = new MainPage();
 
@@ -27,6 +26,7 @@ public class BasketUiTests extends UiTestBase {
     @Feature("Корзина")
     @Story("Заголовок пустой корзины")
     @Owner("Yuferev")
+    @Tag("BasketTests")
     @ParameterizedTest(name = "Появление кнопки при нажатии на корзину")
     void buttunForClickOnBasketTest(String chapter, String buttonText) {
         SelenideLogger.addListener("allure", new AllureSelenide());
@@ -39,11 +39,13 @@ public class BasketUiTests extends UiTestBase {
         });
     }
 
-    @Tag("SMOKE")
+
     @Test
     @Feature("Корзина")
     @Story("Работа с товарами в корзине")
     @Owner("Yuferev")
+    @Tag("SMOKE")
+    @Tag("BasketTests")
     @DisplayName("Добавление товара в корзину")
     void addToBasket() {
         SelenideLogger.addListener("allure", new AllureSelenide());
@@ -62,11 +64,12 @@ public class BasketUiTests extends UiTestBase {
         });
     }
 
-    @Tag("SMOKE")
     @Test
     @Feature("Корзина")
     @Story("Работа с товарами в корзине")
     @Owner("Yuferev")
+    @Tag("SMOKE")
+    @Tag("BasketTests")
     @DisplayName("Удаления товара из корзины")
     void deleteToBasket() {
         SelenideLogger.addListener("allure", new AllureSelenide());
