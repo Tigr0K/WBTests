@@ -1,0 +1,44 @@
+package config;
+
+import com.codeborne.selenide.Configuration;
+import io.restassured.RestAssured;
+import org.openqa.selenium.remote.DesiredCapabilities;
+
+import java.util.Map;
+import java.util.UUID;
+
+public class BaseConfig {
+    public static String baseURI = ApiProvider.getApiConfig().baseURI();;
+    public static String apiBaseURI = ApiProvider.getApiConfig().apiBaseURI();
+    public static String authEP =  ApiProvider.getApiConfig().authEP();
+    public static String currentUserEP = ApiProvider.getApiConfig().currentUserEP();
+    public static String customerCartIdEP = ApiProvider.getApiConfig().customerCartIdEP();
+    public static String cartEP = ApiProvider.getApiConfig().cartEP();
+    public static String authByEmailEP = ApiProvider.getApiConfig().authByEmailEP();
+
+    private final WebConfig webConfig;
+
+    public BaseConfig(WebConfig webConfig) {
+        this.webConfig = webConfig;
+    }
+
+    public void setConfig() {
+        RestAssured.baseURI = apiBaseURI;
+        Configuration.pageLoadStrategy = "eager";
+        Configuration.baseUrl = webConfig.getBaseUrl();
+        Configuration.browser = webConfig.getBrowser().toString();
+        Configuration.browserVersion = webConfig.getBrowserVersion();
+        Configuration.browserSize = webConfig.getBrowserSize();
+
+        if (webConfig.isRemote()) {
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+                    "enableVNC", true,
+                    "enableVideo", true,
+                    "name", "Test: " + UUID.randomUUID()
+            ));
+            Configuration.remote = webConfig.getRemoteUrl();
+            Configuration.browserCapabilities = capabilities;
+        }
+    }
+}
