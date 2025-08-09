@@ -22,7 +22,7 @@ import static io.qameta.allure.Allure.step;
 
 
 @DisplayName("Параметризированные тесты на проверку поиска Wildberries")
-@Tag("SearchTest")
+@Tag("searchTests")
 public class SearchUiTests extends UiTestBase {
     MainPage mainPage = new MainPage();
 
