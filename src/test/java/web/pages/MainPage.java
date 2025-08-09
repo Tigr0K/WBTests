@@ -1,89 +1,99 @@
 package web.pages;
 
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import io.qameta.allure.Step;
 
-import java.time.Duration;
+import java.util.List;
 
+import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
+import static com.codeborne.selenide.CollectionCondition.texts;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
 public class MainPage {
-    private final SelenideElement profileIcon = $$("ul.UserSidebar_buttonsList__9vlVl li").last(),
-            btnLoginByEmail = $("#id_login_by_email"),
-            inputLoginEmail = $("#id_login_email_input"),
-            btnContinueLogin = $("#id_login_continue_button"),
-            inputLoginPassword = $("#id_login_password_input"),
-            userSidebar = $(".UserSidebar_profileDropdownWrapper__OR5ez"),
-            spanErrorField = $(".ErrorIcon_text__feNrN"),
-            divEmailErrorText = $(".Auth_emailErrorText__wAtd3"),
-            popupIncorrectPassword = $(".uppercase-first"),
-            inputPhoneLogin = $("#id_login_phone_input");
+    private SelenideElement searchInput = $("#searchInput");
+    private ElementsCollection productCards = $$(".product-card__wrapper");
+    private ElementsCollection navbarItems = $$(".navbar-pc__item");
+    private SelenideElement basketEmptyButton = $(".basket-empty__btn");
+    private ElementsCollection serviceMenuList = $$(".service-menu__list li");
+    private SelenideElement searchPhotoButton = $(".search-catalog__btn-wrap");
+    private SelenideElement searchPhotoDndPlace = $("#uploadImageForSearchByImagePopUpContainer");
+    private SelenideElement addGoodButton = $(".product-card__add-basket");
+    private SelenideElement deleteGoodButton = $(".btn__del");
+    private SelenideElement goodEntity = $(".basket-list__accordion");
+    private SelenideElement notFoundSearchTitile = $(".not-found-search__title");
+    private SelenideElement validSearchTitile = $(".searching-results__title");
 
-    @Step("Открытие главной страницы сайта")
     public MainPage openPage() {
-        open("");
+        open("/");
         return this;
     }
 
-    @Step("Открываем поп-ап регистрации/авторизации")
-    public MainPage openAuthorizationPopUp() {
-        profileIcon.shouldBe(visible, Duration.ofSeconds(10)).click();
+    public MainPage seatchInputClick(String searchQuery) {
+        searchInput.setValue(searchQuery).shouldBe(visible).pressEnter();
         return this;
     }
 
-    @Step("Ввод номера телефона для авторизации")
-    public MainPage setPhoneNumber(String userPhoneNumber) {
-        inputPhoneLogin.setValue(userPhoneNumber);
-        btnContinueLogin.click();
+    public MainPage clickOnNavbarButton(String chapter) {
+        navbarItems.findBy(text(chapter)).click();
         return this;
     }
 
-    @Step("Ввод почты для авторизации")
-    public MainPage setEmailIntoLoginInput(String userEmail) {
-        btnLoginByEmail.click();
-        inputLoginEmail.setValue(userEmail);
-        btnContinueLogin.click();
+    public MainPage clickOnPhotoSearch() {
+        searchPhotoButton.hover().click();
         return this;
     }
 
-    @Step("Ввод пароля для авторизации")
-    public MainPage setPasswordIntoPasswordInput(String userPassword) {
-        inputLoginPassword.setValue(userPassword);
-        btnContinueLogin.click();
+    public MainPage addToBasketGood() {
+        addGoodButton.click();
         return this;
     }
 
-    @Step("Проверка сайдбара у авторизованного пользователя")
-    public MainPage checkSidebarForAuthorizedUser() {
-        profileIcon.shouldBe(visible, Duration.ofSeconds(10))
-                .shouldBe(clickable, Duration.ofSeconds(5))
-                .click();
-        userSidebar.shouldBe(visible);
+    public MainPage deleteFromBasketGood() {
+        deleteGoodButton.click();
         return this;
     }
 
-    @Step("Проверка текста ошибки при незаполненном поле")
-    public MainPage checkErrorTextWhenEmptyField() {
-        spanErrorField.shouldHave(text("Обязательное для заполнения поле"));
+
+
+    //Проверки
+    public MainPage searchResultShouldBeGreaterThan(Integer count) {
+        productCards.shouldBe(sizeGreaterThan(count));
         return this;
     }
 
-    @Step("Проверка текста ошибки при неверном формате номера телефона")
-    public MainPage checkErrorTextWhenIncorrectPhoneNumber() {
-        spanErrorField.shouldHave(text("Неверный формат телефона прим: +7 (999) 999-99-99"));
+    public MainPage emptyBusketShouldHaveButton(String buttonText) {
+        basketEmptyButton.shouldHave(text(buttonText));
         return this;
     }
 
-    @Step("Проверка текста ошибки при неверной/незарегистрированной почте")
-    public MainPage checkEmailErrorText() {
-        divEmailErrorText.shouldHave(text("Адрес эл. почты введен неверно или не зарегистрирован"));
+    public MainPage titlesOnCkickBattonAddressResult(List<String> expectedLinks) {
+        serviceMenuList.filter(visible).shouldHave(texts(expectedLinks));
         return this;
     }
 
-    @Step("Проверка всплывающего окошка об ошибке пароля")
-    public MainPage checkPopupIncorrectPassword() {
-        popupIncorrectPassword.shouldHave(text("Неверный email или пароль. Попробуйте еще раз"));
+    public MainPage popUpclickOnPhotoSearch() {
+        searchPhotoDndPlace.shouldBe(visible);
+        return this;
+    }
+    public MainPage goodEntityIsExist() {
+        goodEntity.shouldBe(exist);
+        return this;
+    }
+    public MainPage goodEntityIsNotExist() {
+        goodEntity.shouldBe(not(exist));
+        return this;
+    }
+    public MainPage notFoundSearchTitileExist(String text) {
+        notFoundSearchTitile.shouldBe(exist);
+        notFoundSearchTitile.shouldHave(text("Ничего не нашлось по запросу «"+text+"»"));
+        return this;
+    }
+
+    public MainPage validSearchTitileExist(String text) {
+        validSearchTitile.shouldBe(exist);
+        validSearchTitile.shouldHave(text(text));
         return this;
     }
 }
+

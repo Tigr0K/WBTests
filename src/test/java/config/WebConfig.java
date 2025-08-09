@@ -21,11 +21,11 @@ public interface WebConfig extends Config {
     String getBrowserSize();
 
     @Key("baseUrl")
-    @DefaultValue("https://4lapy.ru")
+    @DefaultValue("https://www.wildberries.ru")
     String getBaseUrl();
 
     @Key("remoteUrl")
-    @DefaultValue("https://4lapy.ru")
+    @DefaultValue("https://www.wildberries.ru")
     String getRemoteUrl();
 
     @Key("isRemote")
