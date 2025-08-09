@@ -27,7 +27,7 @@ public class BasketUiTests extends UiTestBase {
     @Story("Заголовок пустой корзины")
     @Owner("Yuferev")
     @Tag("BasketTests")
-    @ParameterizedTest(name = "Появление кнопки при нажатии на корзину")
+    @ParameterizedTest(name = "Появление кнопки при нажатии на пустую корзину")
     void buttunForClickOnBasketTest(String chapter, String buttonText) {
         SelenideLogger.addListener("allure", new AllureSelenide());
         step("Нажимаем на кнопку корзины", () -> {
