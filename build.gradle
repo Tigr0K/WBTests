@@ -38,7 +38,9 @@ dependencies {
             "io.qameta.allure:allure-rest-assured:$allureVersion",
             "org.junit.jupiter:junit-jupiter:$junitVersion",
             "org.slf4j:slf4j-simple:$slf4jVersion",
-            "org.aeonbits.owner:owner:$ownerVersion"
+            "org.aeonbits.owner:owner:$ownerVersion",
+            "io.appium:java-client:8.3.0",
+            "commons-io:commons-io:2.11.0"
     )
 }
 
@@ -71,5 +73,11 @@ task searchTests(type: Test) {
 task basketTests(type: Test) {
     useJUnitPlatform {
         includeTags("BasketTests")
+    }
+}
+
+task mobileTests(type: Test) {
+    useJUnitPlatform {
+        includeTags("Mobile")
     }
 }
