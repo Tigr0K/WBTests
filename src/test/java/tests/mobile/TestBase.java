@@ -17,13 +17,13 @@ import static io.appium.java_client.AppiumBy.className;
 import static io.qameta.allure.Allure.step;
 
 public class TestBase {
-    public static String deviceHost = System.getProperty("deviceHost", "browserstack");
+    public static String runType = System.getProperty("runType");
 
 
     @BeforeAll
     static void beforeAll() {
-        switch (deviceHost) {
-            case "browserstack":
+        switch (runType) {
+            case "remote":
                 Configuration.browser = BrowserstackMobileDriver.class.getName();
                 break;
             case "local":
@@ -48,10 +48,10 @@ public class TestBase {
     void addAttachments() {
         String sessionId = sessionId().toString();
         Attach.pageSource();
-        if (deviceHost.equals("local")) {
+        if (runType.equals("local")) {
             Attach.screenshotAs("Last screenshot");
         }
-        if (deviceHost.equals("browserstack")) {
+        if (runType.equals("remote")) {
             Attach.addVideo(sessionId);
         }
         closeWebDriver();
