@@ -113,6 +113,13 @@ ${Task} -Dbrowser=${browser} -DbroserSize=${browserSize} -DbrowserVersion=${brow
 <img width="70%" title="Telegram bot" src="media/screens/Telegram.png">
 </p>
 
+<a id="jira"></a>
+## <img src="media/logo/Jira.svg" width="25" height="25"/></a> Интеграция с [Jira](https://jira.autotests.cloud/browse/HOMEWORK-1485)
+
+<p align="center">
+<img width="70%" title="Jira" src="media/screens/Jira.png">
+</p>
+
 ## :clapper: Видео примера запуска тестов в Selenoid
 
 К каждому тесту в отчете прилагается видео прогона.
