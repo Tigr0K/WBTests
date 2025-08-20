@@ -130,3 +130,4 @@ public class BasketUiTests extends UiTestBase {
     }
 
 }
+
