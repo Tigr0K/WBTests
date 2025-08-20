@@ -53,6 +53,9 @@ public class BasketUiTests extends UiTestBase {
             mainPage.openPage()
                     .seatchInputClick("Перфоратор");
         });
+        step("Ждем, когда загрузится страница", () -> {
+            mainPage.priceShouldBeVisible();
+        });
         step("Добавляем товар в корзину", () -> {
             mainPage.addToBasketGood();
         });
@@ -76,6 +79,9 @@ public class BasketUiTests extends UiTestBase {
         step("Вводим поисковый запрос", () -> {
             mainPage.openPage()
                     .seatchInputClick("Перфоратор");
+        });
+        step("Ждем, когда загрузится страница", () -> {
+            mainPage.priceShouldBeVisible();
         });
         step("Добавляем товар в корзину", () -> {
             mainPage.addToBasketGood();
