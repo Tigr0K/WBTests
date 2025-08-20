@@ -1,7 +1,6 @@
 package config;
 
 import com.codeborne.selenide.Configuration;
-import io.restassured.RestAssured;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.Map;

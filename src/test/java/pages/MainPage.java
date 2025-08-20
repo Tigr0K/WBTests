@@ -3,6 +3,7 @@ package pages;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 
+import java.time.Duration;
 import java.util.List;
 
 import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
@@ -23,9 +24,13 @@ public class MainPage {
     private SelenideElement goodEntity = $(".basket-list__accordion");
     private SelenideElement notFoundSearchTitile = $(".not-found-search__title");
     private SelenideElement validSearchTitile = $(".searching-results__title");
+    private SelenideElement burgerMenuButton = $(".nav-element__burger");
+    private ElementsCollection burgerMenuFirstListItem = $$(".menu-burger__main-list-link");
+    private SelenideElement burgerMenuSecondListItem = $(".menu-burger__link");
+    private SelenideElement priceCard = $(".product-card__middle-wrap");
 
     public MainPage openPage() {
-        open("/");
+        open("");
         return this;
     }
 
@@ -51,6 +56,18 @@ public class MainPage {
 
     public MainPage deleteFromBasketGood() {
         deleteGoodButton.click();
+        return this;
+    }
+    public MainPage clickburgerMenuButton() {
+        burgerMenuButton.click();
+        return this;
+    }
+    public MainPage hoverFirtListTitle(String value) {
+        burgerMenuFirstListItem.findBy(text(value)).hover();
+        return this;
+    }
+    public MainPage clickSecondListTitle(String value) {
+        burgerMenuSecondListItem.click();
         return this;
     }
 
@@ -84,16 +101,23 @@ public class MainPage {
         goodEntity.shouldBe(not(exist));
         return this;
     }
-    public MainPage notFoundSearchTitileExist(String text) {
+    public MainPage notFoundSearchTitleExist(String text) {
         notFoundSearchTitile.shouldBe(exist);
         notFoundSearchTitile.shouldHave(text("Ничего не нашлось по запросу «"+text+"»"));
         return this;
     }
 
-    public MainPage validSearchTitileExist(String text) {
+    public MainPage validSearchTitleExist(String text) {
         validSearchTitile.shouldBe(exist);
         validSearchTitile.shouldHave(text(text));
         return this;
     }
+
+    public MainPage priceShouldBeVisible() {
+        priceCard.shouldBe(visible, Duration.ofSeconds(10));
+        return this;
+    }
+
+
 }
 

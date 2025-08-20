@@ -74,7 +74,7 @@ public class SearchUiTests extends UiTestBase {
             mainPage.openPage().seatchInputClick("khhhhkjii");
         });
         step("Проверяем текст в заголовке", () -> {
-            mainPage.notFoundSearchTitileExist("khhhhkjii");
+            mainPage.notFoundSearchTitleExist("khhhhkjii");
         });
     }
 
@@ -89,7 +89,7 @@ public class SearchUiTests extends UiTestBase {
             mainPage.openPage().seatchInputClick("Перфоратор");
         });
         step("Проверяем текст в заголовке", () -> {
-            mainPage.validSearchTitileExist("Перфоратор");
+            mainPage.validSearchTitleExist("Перфоратор");
         });
 
     }

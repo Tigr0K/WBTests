@@ -91,4 +91,42 @@ public class BasketUiTests extends UiTestBase {
         });
     }
 
+    @Test
+    @Feature("Корзина")
+    @Story("Работа с товарами в корзине")
+    @Owner("Yuferev")
+    @Tag("BasketTests")
+    @DisplayName("e2e тест корзины")
+    void fullBasketTest() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
+        step("Ждем, когда загрузится страница", () -> {
+            mainPage.openPage()
+                    .priceShouldBeVisible();
+        });
+        step("Нажимаем на бургер меню", () -> {
+            mainPage.clickburgerMenuButton();
+        });
+        step("Наводим на элемент первого списка", () -> {
+            mainPage.hoverFirtListTitle("Игрушки");
+        });
+        step("Клик на элемент второго списка", () -> {
+            mainPage.clickSecondListTitle("Антистресс");
+        });
+        step("Добавляем товар в корзину", () -> {
+            mainPage.addToBasketGood();
+        });
+        step("Нажимаем на корзину", () -> {
+            mainPage.clickOnNavbarButton("Корзина");
+        });
+        step("Проверяем, что товар в корзине", () -> {
+            mainPage.goodEntityIsExist();
+        });
+        step("Удаляем товар из корзины", () -> {
+            mainPage.deleteFromBasketGood();
+        });
+        step("Проверяем, что товаров в корзине нет", () -> {
+            mainPage.goodEntityIsNotExist();
+        });
+    }
+
 }
